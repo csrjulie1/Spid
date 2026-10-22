@@ -1,0 +1,19 @@
+# Upsun configuration, generated using AI at: 2026-10-22T09:20:06.971Z
+# AI can make mistakes. Please modify this file to suit your needs.
+applications:
+  app:
+    type: python:3.13
+
+    hooks:
+      build: |
+        set -ex
+        pip install -r requirements.txt
+
+    web:
+      commands:
+        start: uvicorn main:app --host 0.0.0.0 --port 8080
+
+routes:
+  https://{default}/:
+    type: upstream
+    upstream: app:http
